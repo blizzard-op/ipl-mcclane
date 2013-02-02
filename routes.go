@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/gorilla/mux"
+	// "github.com/gorilla/mux"
 	"github.com/ign/ipl-mcclane/mcclane"
 	"net/http"
 )
@@ -10,8 +10,8 @@ import (
 const (
 	INDEX_PATH = "/brackets/"
 	V6_PREFIX  = "v6/"
-	API_PATH = INDEX_PATH + V6_PREFIX + "api/"
-	LIST_PATH = INDEX_PATH + V6_PREFIX + "api/list/"
+	API_PATH   = INDEX_PATH + V6_PREFIX + "api/"
+	LIST_PATH  = INDEX_PATH + V6_PREFIX + "api/list/"
 )
 
 func main() {

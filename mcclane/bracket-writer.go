@@ -6,7 +6,17 @@ import (
 	"log"
 )
 
-func CreateBracket(bracket *brackets.Bracket) error {
+func UpdateBracket(bracket *brackets.Bracket) error {
+	c, session := ConnectToCollection("brackets")
+	defer session.Close()
+	err := c.UpdateId(bracket.Id, bracket)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func InsertBracket(bracket *brackets.Bracket) error {
 	c, session := ConnectToCollection("brackets")
 	defer session.Close()
 

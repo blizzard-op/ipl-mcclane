@@ -16,8 +16,9 @@ type Bracket struct {
 }
 
 type Match struct {
+	Id           int       `json:"id"`
 	Event        Event     `json:"event"`
-	Children     [2]int    `json:"children"`
+	Children     []*int    `json:"children"`
 	Parent       *int      `json:"parent"`
 	LoserDropsTo *int      `json:"loserDropsTo"`
 	Transform2d  Transform `json:"transform2d"`
@@ -65,6 +66,7 @@ type Game struct {
 type Team struct {
 	Id   *string `json:"id,omitempty"`
 	Name string  `json:"name"`
+	Seed int     `json:"seed"`
 }
 
 type MatchTeam struct {
