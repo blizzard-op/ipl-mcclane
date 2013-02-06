@@ -16,13 +16,13 @@ type Bracket struct {
 }
 
 type Match struct {
-	Id           int       `json:"id"`
-	Event        Event     `json:"event"`
-	Children     []*int    `json:"children"`
-	Parent       *int      `json:"parent"`
-	LoserDropsTo *int      `json:"loserDropsTo"`
-	Transform2d  Transform `json:"transform2d"`
-	HasLoserSlot bool      `json:"hasLoserSlot"`
+	Id           string     `json:"id"`
+	Event        Event      `json:"event"`
+	Children     []*int     `json:"children"`
+	Parent       *int       `json:"parent"`
+	LoserDropsTo *LoserDrop `json:"loserDropsTo"`
+	Transform2d  Transform  `json:"transform2d"`
+	HasLoserSlot bool       `json:"hasLoserSlot"`
 }
 
 type Transform struct {
@@ -64,16 +64,23 @@ type Game struct {
 }
 
 type Team struct {
-	Id   *string `json:"id,omitempty"`
-	Name string  `json:"name"`
-	Seed int     `json:"seed"`
+	Id        *string `json:"id,omitempty"`
+	Name      string  `json:"name"`
+	Image_url string  `bson:"image_url,omitempty" json:"image_url,omitempty"`
+	Seed      int     `bson:"seed,omitempty" json:"seed,omitempty"`
+}
+
+type LoserDrop struct {
+	Match int `json:"match"`
+	Slot  int `json:"slot"`
 }
 
 type MatchTeam struct {
-	Id     *string `json:"id,omitempty"`
-	Name   string  `json:"name"`
-	Seed   int     `json:"seed"`
-	Points int     `json:"points"`
+	Id        *string `json:"id,omitempty"`
+	Name      string  `json:"name"`
+	Image_url string  `json:"image_url,omitempty"`
+	Seed      int     `json:"seed"`
+	Points    int     `json:"points"`
 }
 
 type GroupStage struct {

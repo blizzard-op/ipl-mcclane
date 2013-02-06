@@ -11,8 +11,10 @@ func UpdateBracket(bracket *brackets.Bracket) error {
 	defer session.Close()
 	err := c.UpdateId(bracket.Id, bracket)
 	if err != nil {
+		log.Println("Error with updating ")
 		return err
 	}
+	log.Println("Updated ")
 	return nil
 }
 
