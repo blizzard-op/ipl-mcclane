@@ -6,7 +6,19 @@ import (
 	"log"
 )
 
-func CreateBracket(bracket *brackets.Bracket) error {
+func UpdateBracket(bracket *brackets.Bracket) error {
+	c, session := ConnectToCollection("brackets")
+	defer session.Close()
+	err := c.UpdateId(bracket.Id, bracket)
+	if err != nil {
+		log.Println("Error with updating ")
+		return err
+	}
+	log.Println("Updated ")
+	return nil
+}
+
+func InsertBracket(bracket *brackets.Bracket) error {
 	c, session := ConnectToCollection("brackets")
 	defer session.Close()
 
