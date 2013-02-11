@@ -36,7 +36,7 @@ type Event struct {
 	Title       string        `json:"title"`
 	Starts_at   string        `json:"starts_at"`
 	Ends_at     string        `json:"ends_at"`
-	Stream      Stream        `json:"stream"`
+	Stream      *Stream       `json:"stream"`
 	Rebroadcast bool          `json:"rebroadcast"`
 	Matchup     *Matchup      `json:"matchup"`
 	Groups      []*MediaGroup `json:"groups"`

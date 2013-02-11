@@ -14,7 +14,7 @@ func UpdateBracket(bracket *brackets.Bracket) error {
 		log.Println("Error with updating ")
 		return err
 	}
-	log.Println("Updated ")
+	// log.Println("Updated ")
 	return nil
 }
 
