@@ -6,7 +6,8 @@ import (
 
 type Bracket struct {
 	Id      bson.ObjectId `bson:"_id" json:"id"`
-	UserId  *string       `json:"userId"`
+	Users   []*User       `json:"userId"`
+	Date    string        `json:"date"`
 	Title   string        `json:"title"`
 	Slug    string        `json:"slug"`
 	Kind    string        `json:"kind"`
@@ -90,4 +91,8 @@ type GroupStage struct {
 	Matches     []*Match     `json:"matches"`
 	AdvanceTo   []int        `json:"advanceTo"`
 	Transform2d Transform    `json:"transform2d"`
+}
+
+type User struct {
+	UserId string `json:"userId"`
 }
