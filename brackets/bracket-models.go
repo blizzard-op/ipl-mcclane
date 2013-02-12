@@ -27,10 +27,10 @@ type Match struct {
 }
 
 type Transform struct {
-	X        int `json:"x"`
-	Y        int `json:"y"`
-	PaddingX int `json:"paddingX"`
-	PaddingY int `json:"paddingY"`
+	X        float32 `json:"x"`
+	Y        float32 `json:"y"`
+	PaddingX float32 `json:"paddingX"`
+	PaddingY float32 `json:"paddingY"`
 }
 
 type Event struct {
