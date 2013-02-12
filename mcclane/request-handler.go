@@ -10,10 +10,10 @@ import (
 )
 
 func RequestHandler(w http.ResponseWriter, r *http.Request) {
-	SetCORHeaders(w)
+	SetCORHeaders(w, r)
 	switch r.Method {
 	case "GET":
-		SetCORHeaders(w)
+		SetCORHeaders(w, r)
 		log.Println("GET")
 		data, err := FindBracket(r.URL.Path[len("/brackets/v6/api/"):])
 		if err != nil {
@@ -26,6 +26,11 @@ func RequestHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, string(data))
 	case "PUT":
 		log.Println("PUT")
+		if !checkAuth(r) {
+			log.Println("Auth failed")
+			w.WriteHeader(401)
+			return
+		}
 		result, err := ReadBody(r)
 		if err != nil {
 			log.Println(err)
@@ -38,6 +43,11 @@ func RequestHandler(w http.ResponseWriter, r *http.Request) {
 
 	case "POST":
 		log.Println("POST")
+		if !checkAuth(r) {
+			log.Println("Auth failed")
+			w.WriteHeader(401)
+			return
+		}
 		result, err := ReadBody(r)
 		if err != nil {
 			log.Println(err)
@@ -48,7 +58,7 @@ func RequestHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
 		fmt.Fprintln(w, string(out))
 	case "OPTIONS":
-		SetCORHeaders(w)
+		SetCORHeaders(w, r)
 		w.WriteHeader(200)
 	}
 }
@@ -67,8 +77,9 @@ func ReadBody(r *http.Request) (*brackets.Bracket, error) {
 	return result, nil
 }
 
-func SetCORHeaders(w http.ResponseWriter) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+func SetCORHeaders(w http.ResponseWriter, r *http.Request) {
+	origin := r.Header.Get("Origin")
+	w.Header().Set("Access-Control-Allow-Origin", origin)
 	w.Header().Set("Access-Control-Allow-Methods", "PUT, GET, POST")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	w.Header().Set("Access-Control-Allow-Credentials", "true")

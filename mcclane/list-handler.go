@@ -11,7 +11,7 @@ import (
 func ListHandler(w http.ResponseWriter, r *http.Request) {
 	c, session := ConnectToCollection("brackets")
 	defer session.Close()
-	SetCORHeaders(w)
+	SetCORHeaders(w, r)
 	var result []*models.BracketElement
 	err := c.Find(nil).Select(bson.M{"title": 1, "_id": 1, "slug": 1}).All(&result)
 	if err != nil {
