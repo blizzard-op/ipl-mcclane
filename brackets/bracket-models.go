@@ -5,19 +5,20 @@ import (
 )
 
 type Bracket struct {
-	Id      bson.ObjectId `bson:"_id" json:"id"`
-	Users   []*User       `json:"userId"`
-	Date    string        `json:"date"`
-	Title   string        `json:"title"`
-	Slug    string        `json:"slug"`
-	Kind    string        `json:"kind"`
-	Matches []*Match      `json:"matches"`
-	Teams   []*Team       `json:"teams"`
-	Groups  []*GroupStage `json:"groups"`
+	Id        bson.ObjectId `bson:"_id" json:"id"`
+	Users     []*User       `json:"userId"`
+	Date      string        `json:"date"`
+	Title     string        `json:"title"`
+	Franchise string        `json:"franchise"`
+	Slug      string        `json:"slug"`
+	Kind      string        `json:"kind"`
+	Matches   []*Match      `json:"matches"`
+	Teams     []*Team       `json:"teams"`
+	Groups    []*GroupStage `json:"groups"`
 }
 
 type Match struct {
-	Id           string     `json:"id"`
+	Id           string     `json:"id,omitempty"`
 	Event        Event      `json:"event"`
 	Children     []*int     `json:"children"`
 	Parent       *int       `json:"parent"`
@@ -34,6 +35,7 @@ type Transform struct {
 }
 
 type Event struct {
+	Id          *string       `json:"id,omitempty"`
 	Title       string        `json:"title"`
 	Starts_at   string        `json:"starts_at"`
 	Ends_at     string        `json:"ends_at"`
@@ -44,8 +46,10 @@ type Event struct {
 }
 
 type MediaGroup struct {
-	Id   string `json:"id"`
-	Name string `json:"name"`
+	Id        string `json:"id"`
+	Image_url string `json:"image_url"`
+	Slug      string `json:"slug"`
+	Name      string `json:"name"`
 }
 
 type Stream struct {
@@ -54,14 +58,18 @@ type Stream struct {
 }
 
 type Matchup struct {
+	Id    *string      `json:"id,omitempty"`
 	Games []*Game      `json:"games"`
 	Teams []*MatchTeam `json:"teams"`
 }
 
 type Game struct {
-	Number int    `json:"number"`
-	Status string `json:"status"`
-	Winner *Team  `json:"winner,omitempty"`
+	Id        *string `json:"id,omitempty"`
+	Number    int     `json:"number"`
+	Status    string  `json:"status"`
+	Winner    *Team   `json:"winner,omitempty"`
+	Starts_at *string `bson:"starts_at,omitempty" json:"starts_at,omitempty"`
+	Ends_at   *string `bson:"ends_at,omitempty" json:"ends_at,omitempty"`
 }
 
 type Team struct {

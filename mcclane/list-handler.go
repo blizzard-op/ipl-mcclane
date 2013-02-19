@@ -13,7 +13,7 @@ func ListHandler(w http.ResponseWriter, r *http.Request) {
 	defer session.Close()
 	SetCORHeaders(w, r)
 	var result []*models.BracketElement
-	err := c.Find(nil).Select(bson.M{"title": 1, "_id": 1, "slug": 1}).All(&result)
+	err := c.Find(nil).Select(bson.M{"title": 1, "_id": 1, "slug": 1, "date": 1}).All(&result)
 	if err != nil {
 		fmt.Println(err)
 		return
