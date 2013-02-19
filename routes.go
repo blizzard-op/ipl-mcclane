@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/ign/ipl-mcclane/mcclane"
 	"github.com/ign/ipl-mcclane/system"
@@ -16,9 +17,17 @@ const (
 )
 
 func main() {
+	var portNumber int
+	flag.IntVar(&portNumber, "port", 2121, "Default port is 2121")
+	flag.Parse()
+
 	fmt.Println("Welcome to the party, pal.")
+	fmt.Println("Starting on port: ", portNumber)
 	http.HandleFunc(LIST_PATH, mcclane.ListHandler)
 	http.HandleFunc(API_PATH, mcclane.RequestHandler)
 	http.HandleFunc(PING_PATH, system.Ping)
-	http.ListenAndServe(":2121", nil)
+	err := http.ListenAndServe(fmt.Sprintf(":%d", portNumber), nil)
+	if err != nil {
+		fmt.Println("Could not start IPL-Mcclane on port", portNumber)
+	}
 }

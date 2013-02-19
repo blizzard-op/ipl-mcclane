@@ -57,6 +57,19 @@ func RequestHandler(w http.ResponseWriter, r *http.Request) {
 		out, _ := brackets.Format(result)
 		w.WriteHeader(200)
 		fmt.Fprintln(w, string(out))
+	case "DELETE":
+		log.Println("DELETE")
+		if !checkAuth(r) {
+			log.Println("Auth failed")
+			w.WriteHeader(401)
+			return
+		}
+		SetCORHeaders(w, r)
+		err := RemoveBracket(r.URL.Path[len("/brackets/v6/api/"):])
+		if err != nil {
+			log.Println("Error with Delete")
+		}
+
 	case "OPTIONS":
 		SetCORHeaders(w, r)
 		w.WriteHeader(200)
