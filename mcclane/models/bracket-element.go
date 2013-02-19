@@ -8,4 +8,5 @@ type BracketElement struct {
 	Id    bson.ObjectId `bson:"_id" json:"id"`
 	Title string        `json:"title"`
 	Slug  string        `json:"slug"`
+	Date  string        `json:"date"`
 }
