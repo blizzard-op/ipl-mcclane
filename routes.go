@@ -20,6 +20,7 @@ func main() {
 	var portNumber int
 	flag.IntVar(&portNumber, "port", 2121, "Default port is 2121")
 	flag.Parse()
+	mcclane.LoadConfig()
 
 	fmt.Println("Welcome to the party, pal.")
 	fmt.Println("Starting on port: ", portNumber)
