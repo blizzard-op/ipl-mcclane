@@ -11,7 +11,6 @@ const (
 	//__________prod
 	DB_HOST  = "media-cms-prd-mongodb-01.las1.colo.ignops.com:27017"
 	MONGO_DB = "ipl-mcclane-prd"
-	// CONTENT_API = "http://esports.ign.com/content/v1/events.json?startDate=2012-11-28T00:00:00-07:00"
 )
 
 func ConnectToCollection(col string) (*mgo.Collection, *mgo.Session) {

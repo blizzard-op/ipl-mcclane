@@ -6,14 +6,14 @@ import (
 )
 
 func checkAuth(r *http.Request) bool {
-	authCookie, err := r.Cookie("robocopAuth")
+	authCookie, err := r.Cookie(config.PassKey)
 
 	if err != nil {
 		log.Println(err)
 		return false
 	}
 
-	if authCookie.Value != "yourmovecreep" {
+	if authCookie.Value != config.PassSecret {
 		return false
 	}
 	return true
