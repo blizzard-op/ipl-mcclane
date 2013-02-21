@@ -58,9 +58,10 @@ type Stream struct {
 }
 
 type Matchup struct {
-	Id    *string      `json:"id,omitempty"`
-	Games []*Game      `json:"games"`
-	Teams []*MatchTeam `json:"teams"`
+	Id      *string      `json:"id,omitempty"`
+	Games   []*Game      `json:"games"`
+	Teams   []*MatchTeam `json:"teams"`
+	Best_of int          `json:"best_of"`
 }
 
 type Game struct {
